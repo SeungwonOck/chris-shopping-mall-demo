@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { userActions } from "../action/userAction";
+import ClipLoader from "react-spinners/ClipLoader";
 import "../style/register.style.css";
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const RegisterPage = () => {
   const [passwordError, setPasswordError] = useState("");
   const [policyError, setPolicyError] = useState(false);
   const error = useSelector((state) => state.user.error);
+  const loading = useSelector((state) => state.user.loading);
 
   const register = (event) => {
     event.preventDefault();
@@ -58,6 +60,11 @@ const RegisterPage = () => {
           </Alert>
         </div>
       )}
+      {loading && (
+          <div className="loading-spinner">
+            <ClipLoader color="#FAF9F8" loading={loading} size={50} />
+          </div>
+        )}
       <Form onSubmit={register}>
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>

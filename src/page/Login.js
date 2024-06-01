@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import "../style/login.style.css";
 
@@ -13,10 +14,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const error = useSelector((state) => state.user.error);
+  const loading = useSelector((state) => state.user.loading);
 
   const loginWithEmail = (event) => {
     event.preventDefault();
     //이메일,패스워드를 가지고 백엔드로 보내기
+    dispatch(userActions.loginWithEmail({ email, password }))
   };
 
   const handleGoogleLogin = async (googleData) => {
@@ -32,6 +35,11 @@ const Login = () => {
         {error && (
           <div className="error-message">
             <Alert variant="danger">{error}</Alert>
+          </div>
+        )}
+        {loading && (
+          <div className="loading-spinner">
+            <ClipLoader color="#FAF9F8" loading={loading} size={50} />
           </div>
         )}
         <Form className="login-form" onSubmit={loginWithEmail}>
@@ -59,12 +67,12 @@ const Login = () => {
               Login
             </Button>
             <div>
-              아직 계정이 없으세요?<Link to="/register">회원가입 하기</Link>{" "}
+              Don't have an account yet? <Link to="/register">Register</Link>{" "}
             </div>
           </div>
 
           <div className="text-align-center mt-2">
-            <p>-외부 계정으로 로그인하기-</p>
+            <p>-Use an external account to sign in-</p>
             <div className="display-center"></div>
           </div>
         </Form>
