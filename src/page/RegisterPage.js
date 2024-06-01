@@ -47,8 +47,10 @@ const RegisterPage = () => {
     const { id, value, checked } = event.target;
     if (id === "policy") {
       setFormData({ ...formData, [id]: checked });
+      setPolicyError(false);
     } else {
-      setFormData({...formData, [id]: value });
+      setFormData({ ...formData, [id]: value });
+      setPasswordError("");
     }
   };
 
