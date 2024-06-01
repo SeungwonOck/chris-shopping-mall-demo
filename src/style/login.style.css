@@ -13,3 +13,9 @@
     align-items: center;
     max-width: 550px;
   }
+
+.loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
