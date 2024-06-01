@@ -19,7 +19,7 @@ const RegisterPage = () => {
   const [policyError, setPolicyError] = useState(false);
   const error = useSelector((state) => state.user.error);
   const loading = useSelector((state) => state.user.loading);
-  const [color, setColor] = useState("#FAF9F8");
+  const [color, setColor] = useState("red");
 
   const register = (event) => {
     event.preventDefault();

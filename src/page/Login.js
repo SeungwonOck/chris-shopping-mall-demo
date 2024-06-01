@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const error = useSelector((state) => state.user.error);
   const loading = useSelector((state) => state.user.loading);
-  const [color, setColor] = useState("#FAF9F8");
+  const [color, setColor] = useState("red");
 
   const loginWithEmail = (event) => {
     event.preventDefault();

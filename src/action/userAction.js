@@ -7,14 +7,14 @@ const loginWithEmail = ({ email, password }) => async (dispatch) => {
   try {
     dispatch({ type: types.LOGIN_REQUEST })
     const response = await api.post("/auth/login", { email, password })
-    if (response.status !== 200) throw new Error(response.data.error)
+    if (response.status !== 200) throw new Error(response.error)
     sessionStorage.setItem("token", response.data.token)
     dispatch({ type: types.LOGIN_SUCCESS, payload: response.data })
     dispatch(
           commonUiActions.showToastMessage("Login Successful!", "success")
     );
   } catch (error) {
-    dispatch({type: types.LOGIN_FAIL, paload: error.error})
+    dispatch({type: types.LOGIN_FAIL, payload: error.error})
   }
 };
 const logout = () => async (dispatch) => {};
