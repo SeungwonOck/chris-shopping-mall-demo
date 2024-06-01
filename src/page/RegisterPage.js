@@ -19,6 +19,7 @@ const RegisterPage = () => {
   const [policyError, setPolicyError] = useState(false);
   const error = useSelector((state) => state.user.error);
   const loading = useSelector((state) => state.user.loading);
+  const [color, setColor] = useState("#FAF9F8");
 
   const register = (event) => {
     event.preventDefault();
@@ -62,9 +63,10 @@ const RegisterPage = () => {
       )}
       {loading && (
           <div className="loading-spinner">
-            <ClipLoader color="#FAF9F8" loading={loading} size={50} />
+            <ClipLoader color={color} loading={loading} size={50} />
           </div>
         )}
+      
       <Form onSubmit={register}>
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>

@@ -15,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const error = useSelector((state) => state.user.error);
   const loading = useSelector((state) => state.user.loading);
+  const [color, setColor] = useState("#FAF9F8");
 
   const loginWithEmail = (event) => {
     event.preventDefault();
@@ -39,7 +40,7 @@ const Login = () => {
         )}
         {loading && (
           <div className="loading-spinner">
-            <ClipLoader color="#FAF9F8" loading={loading} size={50} />
+            <ClipLoader color={color} loading={loading} size={50} />
           </div>
         )}
         <Form className="login-form" onSubmit={loginWithEmail}>
