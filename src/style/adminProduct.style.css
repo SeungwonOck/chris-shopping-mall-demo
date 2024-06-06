@@ -48,3 +48,39 @@
     font-size: 10pt;
     padding-right: 10px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    border: 1px solid #dee2e6;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.page-link:hover {
+    background-color: #e9ecef;
+}
+
+.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}

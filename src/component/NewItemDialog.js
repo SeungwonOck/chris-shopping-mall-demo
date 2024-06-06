@@ -25,7 +25,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     mode === "new" ? { ...InitialFormData } : selectedProduct
   );
   const [stock, setStock] = useState([]);
-  console.log("rr", stock)
   const dispatch = useDispatch();
   const [stockError, setStockError] = useState(false);
   const handleClose = () => {
