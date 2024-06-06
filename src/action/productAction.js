@@ -22,6 +22,8 @@ const createProduct = (formData) => async (dispatch) => {
     if (response.status !== 200) throw new Error(response.error)
     dispatch({ type: types.PRODUCT_CREATE_SUCCESS })
     dispatch(commonUiActions.showToastMessage("Product SUccessfully Created!", "success"))
+    // Fetching the updated productList
+    dispatch(getProductList())
   } catch (error) {
     dispatch({ type: types.PRODUCT_CREATE_FAIL, payload: error })
     dispatch(commonUiActions.showToastMessage(error.error, "error"))
