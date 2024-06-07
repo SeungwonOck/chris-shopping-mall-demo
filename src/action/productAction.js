@@ -34,9 +34,9 @@ const createProduct = (formData) => async (dispatch) => {
     const response = await api.post("/product", formData)
     if (response.status !== 200) throw new Error(response.error)
     dispatch({ type: types.PRODUCT_CREATE_SUCCESS })
-    dispatch(commonUiActions.showToastMessage("Product SUccessfully Created!", "success"))
+    dispatch(commonUiActions.showToastMessage("Product Successfully Created!", "success"))
     // Fetching the updated productList
-    dispatch(getProductList())
+    dispatch(getProductList({ page: 1, name: "" }))
   } catch (error) {
     dispatch({ type: types.PRODUCT_CREATE_FAIL, payload: error })
     dispatch(commonUiActions.showToastMessage(error.error, "error"))
@@ -48,7 +48,7 @@ const deleteProduct = (id) => async (dispatch) => {
     const response = await api.delete(`/product/${id}`);
     if (response.status !== 200) throw new Error(response.error);
     dispatch({ type: types.PRODUCT_DELETE_SUCCESS });
-    dispatch(commonUiActions.showToastMessage("Product deleted!", "success"));
+    dispatch(commonUiActions.showToastMessage("Product Deleted!", "success"));
 
     dispatch(getProductList({ page: 1, name: "" }));
   } catch (error) {
