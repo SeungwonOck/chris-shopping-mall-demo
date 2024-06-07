@@ -7,11 +7,12 @@ import { ColorRing } from "react-loader-spinner";
 import { cartActions } from "../action/cartAction";
 import { commonUiActions } from "../action/commonUiAction";
 import { currencyFormat } from "../utils/number";
+import ClipLoader from "react-spinners/ClipLoader";
 import "../style/productDetail.style.css";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
-
+  const { selectedProduct, loading, error } = useSelector((state) => state.product);
   const [size, setSize] = useState("");
   const { id } = useParams();
   const [sizeError, setSizeError] = useState(false);
@@ -33,22 +34,30 @@ const ProductDetail = () => {
 
   useEffect(() => {
     //상품 디테일 정보 가져오기
+    dispatch(productActions.getProductDetail(id))
   }, [id]);
+
+  if (loading || !selectedProduct)
+    return (
+      <div className="loading-spinner">
+          <ClipLoader color="red" loading={loading} size={50} />
+      </div>
+  )
 
   return (
     <Container className="product-detail-card">
       <Row>
         <Col sm={6}>
           <img
-            src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F3a%2F04%2F3a04ededbfa6a7b535e0ffa30474853fc95d2e81.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/fullscreen]"
+            src={selectedProduct.image}
             className="w-100"
             alt="image"
           />
         </Col>
         <Col className="product-info-area" sm={6}>
-          <div className="product-info">리넨셔츠</div>
-          <div className="product-info">₩ 45,000</div>
-          <div className="product-info">샘플설명</div>
+          <div className="product-info">{selectedProduct.name}</div>
+          <div className="product-info">₩ {currencyFormat(selectedProduct.price)}</div>
+          <div className="product-info">{selectedProduct.description}</div>
 
           <Dropdown
             className="drop-down size-drop-down"
