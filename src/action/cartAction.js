@@ -3,7 +3,18 @@ import * as types from "../constants/cart.constants";
 import { commonUiActions } from "../action/commonUiAction";
 const addToCart =
   ({ id, size }) =>
-  async (dispatch) => {};
+    async (dispatch) => {
+      try {
+        dispatch({ type: types.ADD_TO_CART_REQUEST })
+        const response = await api.post("/cart", { productId: id, size, qty: 1 })
+        if (response.status !== 200) throw new Error(response.error)
+        dispatch({ type: types.ADD_TO_CART_SUCCESS, payload: response.data.cartItemQty })
+        dispatch(commonUiActions.showToastMessage("Product Added to Cart!", "success"))
+      } catch (error) {
+        dispatch({ type: types.ADD_TO_CART_FAIL, payload: error.error })
+        dispatch(commonUiActions.showToastMessage(error.error, "error"))
+    }
+  };
 
 const getCartList = () => async (dispatch) => {};
 const deleteCartItem = (id) => async (dispatch) => {};
