@@ -71,18 +71,29 @@ const ProductDetail = () => {
               id="dropdown-basic"
               align="start"
             >
-              {size === "" ? "사이즈 선택" : size.toUpperCase()}
+              {size === "" ? "Select a Size" : size.toUpperCase()}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="size-drop-down">
-              <Dropdown.Item>M</Dropdown.Item>
+              {Object.keys(selectedProduct.stock).length > 0 &&
+                Object.keys(selectedProduct.stock).map((item) =>
+                  selectedProduct.stock[item] > 0 ? (
+                    <Dropdown.Item eventKey={item}>
+                      {item.toUpperCase()}
+                    </Dropdown.Item>
+                  ) : (
+                    <Dropdown.Item eventKey={item} disabled={true}>
+                      {item.toUpperCase()}
+                    </Dropdown.Item>
+                  )
+                )}
             </Dropdown.Menu>
           </Dropdown>
           <div className="warning-message">
-            {sizeError && "사이즈를 선택해주세요."}
+            {sizeError && "Please choose a size"}
           </div>
           <Button variant="dark" className="add-button" onClick={addItemToCart}>
-            추가
+            Add
           </Button>
         </Col>
       </Row>
