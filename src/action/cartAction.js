@@ -36,6 +36,7 @@ const deleteCartItem = (id) => async (dispatch) => {
       type: types.DELETE_CART_ITEM_SUCCESS,
       payload: response.data.cartItemQty,
     })
+    dispatch(commonUiActions.showToastMessage("Product Deleted!", "success"))
     dispatch(getCartList())
   } catch (error) {
     dispatch({ type: types.DELETE_CART_ITEM_FAIL, payload: error })
@@ -43,7 +44,20 @@ const deleteCartItem = (id) => async (dispatch) => {
   }
 };
 
-const updateQty = (id, value) => async (dispatch) => {};
+const updateQty = (id, value) => async (dispatch) => {
+  try {
+    dispatch({ type: types.UPDATE_CART_ITEM_REQUEST });
+    const response = await api.put(`/cart/${id}`, { qty: value });
+    if (response.status !== 200) throw new Error(response.error);
+    dispatch({
+      type: types.UPDATE_CART_ITEM_SUCCESS,
+      payload: response.data.data,
+    });
+  } catch (error) {
+    dispatch({ type: types.UPDATE_CART_ITEM_FAIL, payload: error });
+    dispatch(commonUiActions.showToastMessage(error.error, "error"));
+  }
+};
 const getCartQty = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_CART_QTY_REQUEST });
