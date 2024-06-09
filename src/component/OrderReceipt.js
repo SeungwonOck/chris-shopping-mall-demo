@@ -29,7 +29,7 @@ const OrderReceipt = ({cartList, totalPrice}) => {
           <strong>Total:</strong>
         </div>
         <div>
-          <strong>₩ {user && totalPrice}</strong>
+          <strong>₩ {user && currencyFormat(totalPrice)}</strong>
         </div>
       </div>
       {location.pathname.includes("/cart") && (
