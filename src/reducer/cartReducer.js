@@ -19,8 +19,10 @@ function cartReducer(state = initialState, action) {
     case types.ADD_TO_CART_REQUEST:
     case types.GET_CART_LIST_REQUEST:
     case types.GET_CART_QTY_REQUEST:
+    case types.DELETE_CART_ITEM_REQUEST:
       return { ...state, loading: true }
     case types.ADD_TO_CART_SUCCESS:
+    case types.DELETE_CART_ITEM_SUCCESS:
       return { ...state, loading: false, cartItemQty: payload}
     case types.GET_CART_LIST_SUCCESS:
       return { ...state, loading: false, cartList: payload, totalPrice: payload.reduce((total, item) => (total += item.productId.price * item.qty), 0)}
@@ -29,6 +31,7 @@ function cartReducer(state = initialState, action) {
     case types.ADD_TO_CART_FAIL:
     case types.GET_CART_LIST_FAIL:
     case types.GET_CART_QTY_FAIL:
+    case types.DELETE_CART_ITEM_FAIL:
       return { ...state, loading: false, error: payload }
     default:
       return state;
