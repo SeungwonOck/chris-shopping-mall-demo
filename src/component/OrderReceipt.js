@@ -3,16 +3,18 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import { currencyFormat } from "../utils/number";
+import { useSelector } from 'react-redux';
 
 const OrderReceipt = ({cartList, totalPrice}) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
 
   return (
     <div className="receipt-container">
       <h3 className="receipt-title">Order Receipt</h3>
       <ul className="receipt-list">
-        {cartList.map((item) => (
+        {user && cartList.map((item) => (
           <li>
           <div className="display-flex space-between">
               <div>{item.productId.name}</div>
@@ -27,7 +29,7 @@ const OrderReceipt = ({cartList, totalPrice}) => {
           <strong>Total:</strong>
         </div>
         <div>
-          <strong>₩ {totalPrice}</strong>
+          <strong>₩ {user && totalPrice}</strong>
         </div>
       </div>
       {location.pathname.includes("/cart") && (

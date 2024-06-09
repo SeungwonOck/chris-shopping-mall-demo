@@ -10,6 +10,7 @@ import "../style/cart.style.css";
 const CartPage = () => {
   const dispatch = useDispatch();
   const { cartList, totalPrice } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     //카트리스트 불러오기
@@ -20,7 +21,7 @@ const CartPage = () => {
     <Container>
       <Row>
         <Col xs={12} md={7}>
-          {cartList.length > 0 ? (
+          {user && cartList.length > 0 ? (
             cartList.map((item) => (<CartProductCard item={item} key={item._id} />
             ))
           ) : (    

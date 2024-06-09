@@ -30,7 +30,17 @@ const getCartList = () => async (dispatch) => {
 const deleteCartItem = (id) => async (dispatch) => {};
 
 const updateQty = (id, value) => async (dispatch) => {};
-const getCartQty = () => async (dispatch) => {};
+const getCartQty = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_CART_QTY_REQUEST });
+    const response = await api.get("/cart/qty");
+    if (response.status !== 200) throw new Error(response.error);
+    dispatch({ type: types.GET_CART_QTY_SUCCESS, payload: response.data.qty });
+  } catch (error) {
+    dispatch({ type: types.GET_CART_QTY_FAIL, payload: error });
+    dispatch(commonUiActions.showToastMessage(error.error, "error"));
+  }
+};
 export const cartActions = {
   addToCart,
   getCartList,
