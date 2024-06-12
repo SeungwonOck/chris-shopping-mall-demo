@@ -5,7 +5,6 @@ import PaymentForm from "../component/PaymentForm";
 import "../style/paymentPage.style.css";
 import { useSelector, useDispatch } from "react-redux";
 import { orderActions } from "../action/orderAction";
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { commonUiActions } from "../action/commonUiAction";
 import { cc_expires_format } from "../utils/number";
@@ -32,14 +31,8 @@ const PaymentPage = () => {
   });
 
   const { cartList, totalPrice } = useSelector((state) => state.cart)
-  const { orderNum } = useSelector((state) => state.order)
 
   //맨처음 페이지 로딩할때는 넘어가고  오더번호를 받으면 성공페이지로 넘어가기
-  useEffect(() => {
-    if (orderNum) {
-      navigate("/payment/success");
-    }
-  }, [orderNum, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +51,7 @@ const PaymentPage = () => {
       })
     }
     //오더 생성하가ㅣ
-    dispatch(orderActions.createOrder(data))
+    dispatch(orderActions.createOrder(data, navigate))
   };
 
   const handleFormChange = (event) => {

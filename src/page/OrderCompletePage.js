@@ -1,18 +1,23 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style/paymentPage.style.css";
 
 const OrderCompletePage = () => {
   const { orderNum } = useSelector((state) => state.order)
-  const navigate = useNavigate();
   //만약 주문번호가 없는상태로 이페이지에 왔다면 다시 메인페이지로 돌아가기
-  useEffect(() => {
-    if (!orderNum) {
-      navigate("/");
-    }
-  }, [orderNum, navigate]);
+  if (orderNum === "") {
+    return (
+      <Container className="confirmation-page">
+        <h1>Order Failed</h1>
+        <div>
+          Please Go to Main Page 
+        </div>
+          <Link to={"/"}>Go to Main Page</Link>
+      </Container>
+    )
+  }
   
   return (
     <Container className="confirmation-page">
