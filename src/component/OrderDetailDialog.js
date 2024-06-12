@@ -29,19 +29,19 @@ const OrderDetailDialog = ({ open, handleClose }) => {
         <Modal.Title>Order Detail</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>예약번호: {selectedOrder.orderNum}</p>
-        <p>주문날짜: {selectedOrder.createdAt.slice(0, 10)}</p>
-        <p>이메일: {selectedOrder.userId.email}</p>
+        <p>Order Number: {selectedOrder.orderNum}</p>
+        <p>Date of Order: {selectedOrder.createdAt ? selectedOrder.createdAt.slice(0, 10) : "Date Not Provided"}</p>
+        <p>Email: {selectedOrder.userId.email}</p>
         <p>
-          주소:{selectedOrder.shipTo.address + " " + selectedOrder.shipTo.city}
+          Address:{selectedOrder.shipTo.address + " " + selectedOrder.shipTo.city}
         </p>
         <p>
-          연락처:
+          Contact:
           {`${
             selectedOrder.contact.firstName + selectedOrder.contact.lastName
           } ${selectedOrder.contact.contact}`}
         </p>
-        <p>주문내역</p>
+        <p>Order Receipt</p>
         <div className="overflow-x">
           <Table>
             <thead>
@@ -65,7 +65,7 @@ const OrderDetailDialog = ({ open, handleClose }) => {
                   </tr>
                 ))}
               <tr>
-                <td colSpan={4}>총계:</td>
+                <td colSpan={4}>Total:</td>
                 <td>{currencyFormat(selectedOrder.totalPrice)}</td>
               </tr>
             </tbody>
@@ -88,9 +88,9 @@ const OrderDetailDialog = ({ open, handleClose }) => {
               onClick={handleClose}
               className="order-button"
             >
-              닫기
+              Close
             </Button>
-            <Button type="submit">저장</Button>
+            <Button type="submit">Save</Button>
           </div>
         </Form>
       </Modal.Body>
