@@ -19,12 +19,12 @@ const OrderTable = ({ header, data, openEditForm }) => {
               <tr onClick={() => openEditForm(item)}>
                 <th>{index}</th>
                 <th>{item.orderNum}</th>
-                <th>{item.createdAt.slice(0, 10)}</th>
+                <th>{item.createdAt ? item.createdAt.slice(0, 10) : "Date Not Provided"}</th>
                 <th>{item.userId.email}</th>
                 {item.items.length > 0 ? (
                   <th>
                     {item.items[0].productId.name}
-                    {item.items.length > 1 && `외 ${item.items.length - 1}개`}
+                    {item.items.length > 1 && `+ ${item.items.length - 1}more`}
                   </th>
                 ) : (
                   <th></th>
