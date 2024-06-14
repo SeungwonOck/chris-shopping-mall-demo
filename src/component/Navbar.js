@@ -103,7 +103,7 @@ const Navbar = ({ user }) => {
               <FontAwesomeIcon icon={faShoppingBag} />
               {!isMobile &&(
                 <span style={{ cursor: "pointer" }}>{`Cart(${
-                  user ? cartItemQty : 0
+                  user && cartItemQty ? cartItemQty : 0
                 })`}</span>
               )}
             </div>
