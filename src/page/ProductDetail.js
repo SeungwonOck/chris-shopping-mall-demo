@@ -37,10 +37,6 @@ const ProductDetail = () => {
     if (sizeError) setSizeError(false)
   };
 
-  //카트에러가 있으면 에러메세지 보여주기
-
-  //에러가 있으면 에러메세지 보여주기
-
   useEffect(() => {
     //상품 디테일 정보 가져오기
     dispatch(productActions.getProductDetail(id))

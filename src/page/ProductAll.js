@@ -10,13 +10,16 @@ const ProductAll = () => {
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.product);
   const [query, setQUery] = useSearchParams();
+  const { menu } = useSelector((state) => state.product)
+  console.log("menu", menu);
   const name = query.get("name");
   // 처음 로딩하면 상품리스트 불러오기
   useEffect(() => {
+    const menuLowerCase = menu ? menu.toLowerCase() : "";
     dispatch(
-      productActions.getProductList({
-        name,
-      })
+      productActions.getProductList(
+        {name}, menuLowerCase
+      )
     );
   }, [query]);
 

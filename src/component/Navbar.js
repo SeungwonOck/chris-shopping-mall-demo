@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -7,7 +7,7 @@ import {
   faSearch,
   faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
@@ -19,6 +19,10 @@ const Navbar = ({ user }) => {
   const { cartItemQty } = useSelector((state) => state.cart);
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
+  const [query, setQUery] = useSearchParams();
+  const location = useLocation();
+  const [inputValue, setInputValue] = useState("");
+  const name = query.get("name");
   const menuList = [
     "All",
     "Women",
@@ -31,6 +35,13 @@ const Navbar = ({ user }) => {
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (!searchParams.has("name")) {
+      setInputValue("");
+    }
+  }, [location]);
+
   const onCheckEnter = (event) => {
     if (event.key === "Enter") {
       if (event.target.value === "") {
@@ -41,11 +52,9 @@ const Navbar = ({ user }) => {
   };
 
   const handleCategory = (menu) => {
-    if (menu === "All") {
-      dispatch(productActions.getProductList())
-    } else {
-      dispatch(productActions.getProductsByCategory(menu.toLowerCase()))
-    }
+    navigate("/");
+    const menuLowerCase = menu ? menu.toLowerCase() : null;
+    dispatch(productActions.getProductList({name}, menuLowerCase))
   }
 
   const logout = () => {
