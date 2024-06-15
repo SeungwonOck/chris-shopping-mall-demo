@@ -31,18 +31,19 @@ body{
   border-radius: 20px;
   border: 1.5px solid black;
   padding: 12px 16px;
-  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  transition: all 0.3s;
 }
 
 .menu li a:hover {
   background-color: black;
-  color: white
+  color: white !important;
+  cursor: pointer;
 }
 
-.menu li a:focus {
+.menu li a:active {
   background-color: red;
+  color: white !important;
   border: none;
-  color: white;
 }
 
 .nav-logo{

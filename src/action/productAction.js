@@ -14,6 +14,18 @@ const getProductList = (query) => async (dispatch) => {
     dispatch({type: types.PRODUCT_GET_FAIL, payload: error})
   }
 };
+
+const getProductsByCategory = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_PRODUCT_CATEGORY_REQUEST })
+    const response = await api.get(`/product/${category}`)
+    dispatch({type: types.GET_PRODUCT_CATEGORY_SUCCESS, payload: response.data})
+  } catch (error) {
+    dispatch({ type: types.GET_PRODUCT_CATEGORY_FAIL, payload: error.error })
+    dispatch(commonUiActions.showToastMessage(error.error, "error"))
+  }
+}
+
 const getProductDetail = (id) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_PRODUCT_DETAIL_REQUEST })
@@ -72,4 +84,5 @@ export const productActions = {
   deleteProduct,
   editProduct,
   getProductDetail,
+  getProductsByCategory,
 };

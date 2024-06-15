@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
 import { Button } from 'react-bootstrap';
+import { productActions } from '../action/productAction';
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Navbar = ({ user }) => {
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
+
   const onCheckEnter = (event) => {
     if (event.key === "Enter") {
       if (event.target.value === "") {
@@ -37,6 +39,15 @@ const Navbar = ({ user }) => {
       navigate(`?name=${event.target.value}`);
     }
   };
+
+  const handleCategory = (menu) => {
+    if (menu === "All") {
+      dispatch(productActions.getProductList())
+    } else {
+      dispatch(productActions.getProductsByCategory(menu.toLowerCase()))
+    }
+  }
+
   const logout = () => {
     dispatch(userActions.logout());
     navigate("/");
@@ -137,7 +148,7 @@ const Navbar = ({ user }) => {
         <ul className="menu">
           {menuList.map((menu, index) => (
             <li key={index}>
-              <a href="#">{menu}</a>
+              <a onClick={() => handleCategory(menu)}>{menu}</a>
             </li>
           ))}
         </ul>
