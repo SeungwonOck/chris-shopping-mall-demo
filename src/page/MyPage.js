@@ -16,12 +16,15 @@ const MyPage = () => {
   
   
   useEffect(() => {
-    dispatch(orderActions.getOrder())
+    if (!user) {
+      navigate("/");
+      alert("You need to log in first!")
+    } else {
+      dispatch(orderActions.getOrder())
+    }
   }, []);
 
-  if (!user) {
-    navigate("/");
-  }
+  
 
   // 오더리스트가 없다면? 주문한 상품이 없습니다 메세지 보여주기
   if (orderList?.length === 0) {

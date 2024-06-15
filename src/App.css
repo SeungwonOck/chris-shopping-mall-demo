@@ -23,10 +23,25 @@ body{
   list-style-type: none;
   padding: 20px;
 }
+
 .menu li a{
   text-decoration: none;
   color:black;
   margin-left:20px;
+  border-radius: 20px;
+  border: 1.5px solid black;
+  padding: 12px 16px;
+}
+
+.menu li a:hover {
+  background-color: black;
+  color: white
+}
+
+.menu li a:focus {
+  background-color: red;
+  border: none;
+  color: white;
 }
 
 .nav-logo{
@@ -40,6 +55,7 @@ body{
 }
 .burger-menu{
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .landing-search-box{
@@ -60,6 +76,7 @@ body{
   border:none;
   margin-left:5px;
   background-color: #FAF9F8;
+  width: 60%;
 }
 .search-box input:focus {
   outline:none
@@ -276,4 +293,14 @@ body{
   justify-content: flex-end;
   margin-top: 20px;
   margin-right: 20px;
+}
+
+.content-container{
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 63rem) {
+  .content-container{
+     margin-top: 100px;
+   }
 }

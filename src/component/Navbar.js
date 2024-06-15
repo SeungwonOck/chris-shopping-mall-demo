@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
+import { Button } from 'react-bootstrap';
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
@@ -75,9 +76,14 @@ const Navbar = ({ user }) => {
         </div>
       </div>
       {user && user.level === "admin" && (
-        <Link to="/admin/product?page=1" className="link-area">
-          Admin page
-        </Link>
+        <div className="link-area">
+          <Button
+            variant="dark"
+            onClick={() => { navigate("/admin/product?page=1") }}
+            >
+            Admin page
+          </Button>
+        </div>
       )}
       <div className="nav-header">
         <div className="burger-menu hide">
@@ -136,7 +142,7 @@ const Navbar = ({ user }) => {
             </li>
           ))}
         </ul>
-        {!isMobile && ( // admin페이지에서 같은 search-box스타일을 쓰고있음 그래서 여기서 서치박스 안보이는것 처리를 해줌
+        {!isMobile && (
           <div className="search-box landing-search-box ">
             <FontAwesomeIcon icon={faSearch} />
             <input

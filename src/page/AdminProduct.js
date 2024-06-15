@@ -19,7 +19,7 @@ const AdminProduct = () => {
   const [searchQuery, setSearchQuery] = useState({
     page: query.get("page") || 1,
     name: query.get("name") || "",
-  }); //검색 조건들을 저장하는 객체
+  });
 
   const [mode, setMode] = useState("new");
   const tableHeader = [
@@ -81,7 +81,7 @@ const AdminProduct = () => {
           <SearchBox
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
-            placeholder="제품 이름으로 검색"
+            placeholder="Search by Product Name"
             field="name"
           />
         </div>
