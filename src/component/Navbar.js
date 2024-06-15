@@ -18,14 +18,14 @@ const Navbar = ({ user }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
-    "여성",
+    "Women",
     "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
+    "Men",
+    "Baby",
+    "Kids",
     "H&M HOME",
     "Sale",
-    "지속가능성",
+    "Sustainability",
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
@@ -50,7 +50,7 @@ const Navbar = ({ user }) => {
               <FontAwesomeIcon className="search-icon" icon={faSearch} />
               <input
                 type="text"
-                placeholder="제품검색"
+                placeholder="Product Search"
                 onKeyPress={onCheckEnter}
               />
             </div>
@@ -141,7 +141,7 @@ const Navbar = ({ user }) => {
             <FontAwesomeIcon icon={faSearch} />
             <input
               type="text"
-              placeholder="제품검색"
+              placeholder="Product Search"
               onKeyPress={onCheckEnter}
             />
           </div>

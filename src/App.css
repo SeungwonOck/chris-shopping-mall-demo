@@ -208,6 +208,8 @@ body{
   color:white;
   background-color: red;
   font-weight: bold;
+  cursor: pointer;
+  
 }
 .sidebar-area{
   padding-left: 0;
