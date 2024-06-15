@@ -19,13 +19,12 @@ const Navbar = ({ user }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
+    "All",
     "Women",
-    "Divided",
     "Men",
     "Baby",
     "Kids",
-    "H&M HOME",
-    "Sale",
+    "Sports",
     "Sustainability",
   ];
   let [width, setWidth] = useState(0);

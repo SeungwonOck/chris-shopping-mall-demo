@@ -65,7 +65,7 @@ const ProductDetail = () => {
         </Col>
         <Col className="product-info-area" sm={6}>
           <div className="product-info">{selectedProduct.name}</div>
-          <div className="product-info">₩ {currencyFormat(selectedProduct.price)}</div>
+          <div className="product-info">$ {currencyFormat(selectedProduct.price)}</div>
           <div className="product-info">{selectedProduct.description}</div>
 
           <Dropdown
