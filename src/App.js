@@ -8,6 +8,10 @@ import AppLayout from "./Layout/AppLayout";
 import AppRouter from "./routes/AppRouter";
 
 function App() {
+  useEffect(()=>{
+    localStorage.setItem("Recently Viewed", JSON.stringify( [] ))
+  }, [])
+  
   return (
     <div>
       <AppLayout>

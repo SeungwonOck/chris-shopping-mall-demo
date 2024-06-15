@@ -42,6 +42,20 @@ const ProductDetail = () => {
     dispatch(productActions.getProductDetail(id))
   }, [id]);
 
+  useEffect(() => {
+    if (selectedProduct && selectedProduct._id) {
+        let takeOut = localStorage.getItem("Recently Viewed");
+        takeOut = takeOut ? JSON.parse(takeOut) : [];
+        takeOut.push(selectedProduct._id);
+        takeOut = Array.from(new Set(takeOut));
+        if (takeOut.length > 10) {
+            takeOut.shift();
+        }
+        localStorage.setItem("Recently Viewed", JSON.stringify(takeOut));
+    }
+  }, [selectedProduct]);
+
+
   if (loading || !selectedProduct)
     return (
       <div className="loading-spinner">

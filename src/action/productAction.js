@@ -7,12 +7,10 @@ const getProductList = (query, menu) => async (dispatch) => {
   try {
     dispatch({ type: types.PRODUCT_GET_REQUEST })
     const params = { ...query };
-    console.log("menu: " + menu)
     if (menu) {
       params.menu = menu
     }
     const response = await api.get("/product", { params })
-    console.log("response", response)
     dispatch({type: types.PRODUCT_GET_SUCCESS, payload: response.data})
   } catch (error) {
     dispatch({type: types.PRODUCT_GET_FAIL, payload: error})
