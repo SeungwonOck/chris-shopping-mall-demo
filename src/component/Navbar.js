@@ -51,6 +51,10 @@ const Navbar = ({ user }) => {
     }
   };
 
+  const getAllProducts = () => {
+    dispatch(productActions.getProductList({name}))
+  }
+
   const handleCategory = (menu) => {
     navigate("/");
     const menuLowerCase = menu ? menu.toLowerCase() : null;
@@ -156,7 +160,7 @@ const Navbar = ({ user }) => {
       </div>
 
       <div className="nav-logo">
-        <Link to="/">
+        <Link to="/" onClick={getAllProducts}>
           <img width={100} src="/image/hm-logo.png" alt="hm-logo.png" />
         </Link>
       </div>
